@@ -1,0 +1,46 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Blog App</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    
+
+</head>
+<body>
+    
+    <nav class="navbar">
+        <div class="container navbar_bg">
+            <h2 class="navbar_heading pt-2">BlogAway</h2>
+            <div class="nav_btns">
+                {% if user.is_authenticated %}
+                    <a class='btn profile_btn' href="{% url 'user_profile' user.pk %}">Profile</a>
+                    <a class='btn logout_btn' href="{% url 'user_logout' %}">Logout</a>
+                {% endif %}
+            </div>
+            
+        </div>
+    </nav>
+
+    <div class="container mt-3">
+        {% if messages %}
+            {% for msg in messages %}
+                <label class="alert alert-{{ msg.tags }}">{{ msg }}</label>
+            {% endfor %}
+        {% endif %}
+
+        {% block content %}
+        {% endblock %}
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    {% block javascript %}
+    {% endblock %}
+    <link rel='stylesheet' type='text/css' media='screen' href='{% static "main.css" %}'>
+</body>
+</html>
