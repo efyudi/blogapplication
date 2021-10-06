@@ -1,0 +1,49 @@
+.navbar{
+    background-color: rgb(38, 203, 212);
+}
+
+.navbar_heading{
+    color: white;
+}
+
+.nav_btns{
+    float: right;
+}
+
+.logout_btn{
+    color: rgb(212, 64, 38);
+}
+
+
+.login_link, .register_link{
+    color: rgb(38, 203, 212);
+    text-decoration: underline;
+}
+
+.page_heading{
+    font-weight: bold;
+}
+
+.page_greet{
+    color: grey;
+}
+
+.user_guide{
+    margin-left: 4%;
+}
+
+.card_content{
+    padding: 5%;
+}
+
+
+
+/*ON HOVER*/
+
+.login_link:hover, .register_link:hover{
+    color: rgb(38, 131, 212);
+}
+
+.register_btn:hover, .login_btn:hover{
+    color: rgb(147, 209, 75);
+}
