@@ -1,0 +1,13 @@
+{% extends "users/base.html" %}
+
+{% block content %}
+    <div class="container">
+        <div class="card">
+            <img class="user_image" src="{{ user.profile.profile_pic.url }}" width="50" height="50">
+            <h3 class="profile_heading">Username</h3>
+            <label>{{ user.username }}</label>
+            <h3 class="profile_heading">Email</h3>
+            <label>{{ user.email }}</label>
+        </div>
+    </div>
+{% endblock %}

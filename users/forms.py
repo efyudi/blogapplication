@@ -1,0 +1,12 @@
+from django import forms
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import User
+
+
+class CustomUserRegisterForm(UserCreationForm):
+    email = forms.EmailField(max_length=150)
+
+    class Meta:
+        model = User
+        fields = ['username', 'email', 'password1', 'password2']
+

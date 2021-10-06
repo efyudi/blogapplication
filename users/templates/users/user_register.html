@@ -1,0 +1,20 @@
+{% extends "users/base.html" %}
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+    <h2 class="page_heading mt-4">Sign Up</h2>
+    <p class="page_greet mb-4">Glad to have a new member for our blog site!</p>
+
+    <form method="POST">
+        {% csrf_token %}
+        <fieldset class="form_content">
+            {{ form|crispy }}
+        </fieldset>
+        <fieldset class="form_btns mt-4">
+            <button class="btn register_btn" type="submit">Register</button>
+            <label class="user_guide">Already registered? <a class="login_link" href="{% url 'user_login' %}">Login</a></label>
+        </fieldset>
+    </form>
+{% endblock %}
+
