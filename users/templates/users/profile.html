@@ -3,11 +3,20 @@
 {% block content %}
     <div class="container">
         <div class="card">
-            <img class="user_image" src="{{ user.profile.profile_pic.url }}" width="50" height="50">
-            <h3 class="profile_heading">Username</h3>
-            <label>{{ user.username }}</label>
-            <h3 class="profile_heading">Email</h3>
-            <label>{{ user.email }}</label>
+            <div class="card_content">
+                <div class="col-xl-3">
+                    <img class="user_image" src="{{ user.profile.profile_pic.url }}" width="100" height="100">
+                </div>
+                <div class="col-xl-9 main_content">
+                    <a class="edit_btn" href="{% url 'update_profile' user.id %}">Edit <i class="fa fa-edit"></i></a>
+
+                    <h4 class="profile_heading">Username</h4>
+                    <label>{{ user.username }}</label>
+
+                    <h4 class="profile_heading">Email</h4>
+                    <label>{{ user.email }}</label>
+                </div>
+            </div>
         </div>
     </div>
 {% endblock %}

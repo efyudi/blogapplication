@@ -8,6 +8,7 @@
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel='stylesheet' type='text/css' media='screen' href='{% static "main.css" %}'>
 
 </head>
@@ -15,11 +16,13 @@
     
     <nav class="navbar">
         <div class="container navbar_bg">
-            <h2 class="navbar_heading pt-2">BlogAway</h2>
+            <a class="home_link" href="{% url 'blog_home' %}"><h2 class="navbar_heading pt-2">BlogAway</h2></a>
             <div class="nav_btns">
                 {% if user.is_authenticated %}
                     <a class='btn profile_btn' href="#">Profile</a>
                     <a class='btn logout_btn' href="{% url 'user_logout' %}">Logout</a>
+                {% else %}
+                    <a class='btn logout_btn' href="{% url 'user_login' %}">Login</a>
                 {% endif %}
             </div>
             

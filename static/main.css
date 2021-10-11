@@ -2,8 +2,13 @@
     background-color: rgb(38, 203, 212);
 }
 
+.home_link{
+    text-decoration: none;
+}
+
 .navbar_heading{
     color: white;
+    text-decoration: none;
 }
 
 .nav_btns{
@@ -36,8 +41,23 @@
     padding: 5%;
 }
 
+.user_image {
+    float: left;
+    border-radius: 50%;
+}
 
+.main_content{
+    width: 100%;
+    padding-left: 20%;
+}
 
+.profile_heading{
+    margin-top: 2%;
+}
+
+.edit_btn{
+    float: right;
+}
 /*ON HOVER*/
 
 .login_link:hover, .register_link:hover{
