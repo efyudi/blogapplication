@@ -14,7 +14,13 @@
                     <label>{{ user.username }}</label>
 
                     <h4 class="profile_heading">Email</h4>
-                    <label>{{ user.email }}</label>
+                    {% if user.email %}
+                        <label>{{ user.email }}</label>
+                    {% else %}
+                        <label>No email available</label>
+                    {% endif %}
+                    <h4 class="profile_heading">Bio</h4>
+                    <label>{{ user.profile.bio }}</label>
                 </div>
             </div>
         </div>
