@@ -19,7 +19,7 @@ class UserRegister(FormView):
         return super().form_valid(form)
 
     def get_success_url(self):
-        return reverse('register_profile')
+        return reverse('user_login')
 
 
 class ProfileDetailView(LoginRequiredMixin, DetailView):
