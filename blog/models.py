@@ -25,8 +25,12 @@ class PostModel(models.Model):
 
 class Comments(models.Model):
     body = models.TextField()
+    date_posted = models.DateTimeField(default=timezone.now)
     commented_by = models.ForeignKey(User, on_delete=models.CASCADE)
     post = models.ForeignKey(PostModel, on_delete=models.CASCADE)
 
     def __str__(self) -> str:
         return self.body
+
+    def get_absolute_url(self):
+        return reverse('blog_home')
