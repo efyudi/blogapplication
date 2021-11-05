@@ -14,6 +14,8 @@
         <fieldset class="form_btns mt-4">
             <button class="btn login_btn" type="submit">Login</button>
             <label class="user_guide">Not registered? <a class="register_link" href="{% url 'user_register' %}">Sign Up</a></label>
+            <br>
+            <a class="register_link" href="{% url 'password_reset' %}">Forgot your password ?</a>
         </fieldset>
     </form>
 {% endblock %}
