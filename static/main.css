@@ -2,6 +2,11 @@
     background-color: rgb(38, 203, 212);
 }
 
+.comments_section{
+    margin: 15px;
+    padding: 15px;
+}
+
 .home_link{
     text-decoration: none;
 }
@@ -58,6 +63,24 @@
 .edit_btn{
     float: right;
 }
+
+.link_btns{
+    color: inherit;
+}
+
+.fr{
+    float: right;
+    text-align: right;
+}
+
+.inline{
+    display: inline-block;
+}
+
+.helping_text{
+    font-size: 10px;
+}
+
 /*ON HOVER*/
 
 .login_link:hover, .register_link:hover{
@@ -66,4 +89,9 @@
 
 .register_btn:hover, .login_btn:hover{
     color: rgb(147, 209, 75);
+}
+
+.like_btn:hover{
+    transition-duration: .2s;
+    color: lightblue;
 }
