@@ -1,0 +1,16 @@
+{% extends "blog/base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <form method="POST">
+        {% csrf_token %}
+        <fieldset class="form_content">
+            <label>Do you want to delete the following comment ?</label>
+            <b>{{ object.body }}</b>
+        </fieldset>
+        <fieldset class="form_btns mt-4">
+            <button class="btn posts_btn" type="submit">Delete</button>
+            <a class="btn posts_btn" href="{% url 'blog_home' %}">Cancel</a>
+        </fieldset>
+    </form>
+{% endblock %}
