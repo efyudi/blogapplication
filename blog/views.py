@@ -1,4 +1,6 @@
+from django.contrib.auth import models
 from django.contrib.auth.models import User
+from django.forms import fields
 from django.http.response import HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
@@ -11,7 +13,7 @@ from django.views.generic import (
     DeleteView,
 )
 from .models import PostModel, Comments
-from .forms import CommentsForm
+from .forms import BlogForm, CommentsForm 
 
 
 def like_post(request, pk):
@@ -65,9 +67,9 @@ class CommentCreateView(LoginRequiredMixin, CreateView):
 
 
 class BlogHomeListAndCreate(CreateView):
+    form_class = BlogForm
     template_name = 'blog/blog_home.html'
-    model = PostModel
-    fields = ['title', 'content']
+    
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -103,3 +105,31 @@ class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
             return True
         return False
 
+
+class CommentDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    template_name = 'blog/delete_comment.html'
+    model = Comments
+    success_url = reverse_lazy('blog_home')
+
+
+    def test_func(self):
+        comment = self.get_object()
+
+        if comment.commented_by == self.request.user:
+            return True
+        
+        return False
+
+
+class CommentUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    template_name = 'blog/update_comment.html'
+    model = Comments
+    fields = ['body',]
+
+    def test_func(self):
+        comment = self.get_object()
+
+        if comment.commented_by == self.request.user:
+            return True
+        
+        return False
