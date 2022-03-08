@@ -1,0 +1,99 @@
+{% extends "blog/base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    {% if user.is_authenticated %}
+        <div class="card">
+            <div class="card_content">
+                <h3>New Post</h3>
+                <form method="POST">
+                    {% csrf_token %}
+                    <fieldset class="form_content">
+                        {{form|crispy}}
+                    </fieldset>
+                    <fieldset class="form_btns mt-4">
+                        <button class="btn posts_btn" type="submit">Post</button>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    {% endif %}
+
+    {% for post in posts %}
+        <div class="card mt-3">
+            <div class="card_content">
+                <div class="fr">
+                    {% if user == post.author %}
+                        <a class="link_btns" href="{% url 'update_post' post.id %}">
+                            <i class="fa fa-edit fa-fw "></i>
+                        </a>
+                        <a class="link_btns" href="{% url 'delete_post' post.id %}">
+                            <i class="fa fa-trash-o fa-fw"></i>
+                        </a>
+                    {% endif %}
+                    <p class="text-muted helping_text">{{ post.date_posted|date:"F d, Y" }}</p>
+                    <p class="helping_text">posted by: <span class="text-muted">{{ post.author }}</span></p>
+                    
+                </div>
+                <h3 class="post_title">{{ post.title }}</h3>
+                {% if user in post.liked_by.all %}
+                    <a class="link_btns like_btn"  href="{% url 'like_post' post.id %}">
+                        <i class="fa fa-thumbs-o-down"> <span class="text-muted">{{post.total_likes}}</span></i>
+                    </a>
+                {% else %}
+                    <a class="link_btns like_btn" href="{% url 'like_post' post.id %}">
+                        <i class="fa fa-thumbs-o-up"> <span class="text-muted">{{post.total_likes}}</span></i>
+                    </a>
+                {% endif %}
+                
+                <p class="post_content">{{ post.content }}</p>
+                
+                {% for comment in comments %}
+                    {% if comment.post.id == post.id %}
+                        <div class="card">
+                            <div class="comments_section">
+                                <a href="{% url 'user_profile' comment.commented_by.profile.id %}">
+                                    <img class="user_image" height="30px" width="30px" src="{{ comment.commented_by.profile.profile_pic.url }}">
+                                </a>
+                                <br>
+                                
+                                {% if comment.commented_by == user %}
+                                    <div class="fr">
+                                        <a href="{% url 'update_comment' comment.id %}" class="link_btns">
+                                            <i class="fa fa-edit fa-fw "></i>
+                                        </a>
+
+                                        <a href="{% url 'delete_comment' comment.id %}" class="link_btns">
+                                            <i class="fa fa-trash-o fa-fw"></i>
+                                        </a>
+                                    </div>
+                                
+                                {% endif %}
+
+                                <p class="text-muted helping_text">{{ comment.date_posted|date:"F d, Y   h:i A" }}</p>
+                                <p>{{ comment.body }}</p>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+
+                {% if user.is_authenticated %}
+                    <div class="card">
+                        <form method="POST" action="{% url 'post_comment' post.id %}">
+                            {% csrf_token %}
+                            <fieldset class="form_content">
+                                {% for field in comment_form %}
+                                    {{ field }}
+                                {% endfor %}
+                            </fieldset>
+                            <fieldset class="form_btns mt-4">
+                                <button class="btn btn-small" type="submit">Comment</button>
+                            </fieldset>
+                        </form>
+                    </div>
+                {% endif %}
+
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}

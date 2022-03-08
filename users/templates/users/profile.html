@@ -1,0 +1,28 @@
+{% extends "users/base.html" %}
+
+{% block content %}
+    <div class="container">
+        <div class="card">
+            <div class="card_content">
+                <div class="col-xl-3">
+                    <img class="user_image" src="{{ user.profile.profile_pic.url }}" width="100" height="100">
+                </div>
+                <div class="col-xl-9 main_content">
+                    <a class="edit_btn" href="{% url 'update_profile' user.id %}">Edit <i class="fa fa-edit"></i></a>
+
+                    <h4 class="profile_heading">Username</h4>
+                    <label>{{ user.username }}</label>
+
+                    <h4 class="profile_heading">Email</h4>
+                    {% if user.email %}
+                        <label>{{ user.email }}</label>
+                    {% else %}
+                        <label>No email available</label>
+                    {% endif %}
+                    <h4 class="profile_heading">Bio</h4>
+                    <label>{{ user.profile.bio }}</label>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
